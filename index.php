@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="static/ico/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/login.css">
     <title>L'impressionnisme</title>
   </head>
   <body>
@@ -43,9 +44,9 @@
                     $image = "background-image: url('./static/".$row["img_name"]."');";
                     $price = number_format($row["price"]);
                     echo '
-                      <div class="paint-card">
+                      <div class="paint-card" data-name="'.$row["name"].'">
                         <div class="paint-title">'.$row["name"].'</div>
-                        <div class="card-img" style="'.$image.'">
+                        <div class="card-img" style="'.$image.'" data-img="'.$row["img_name"].'">
                           <div class="click-ic">
                             <div class="click-btn"></div>
                           </div>
@@ -53,7 +54,7 @@
                         </div>
                         <div class="paint-details">'.$row["year"].'<br>'.$row["painter"].'</div>
                         <div class="paint-price">$'.$price.'<span>.00</span></div>
-                        <img class="cart-ico" src="./static/ico/cart.svg" alt="Add icon" data-img="'.$row["img_name"].'">
+                        <img class="cart-ico" src="./static/ico/cart.svg" alt="Add icon">
                       </div>
                     ';
                   }
@@ -101,8 +102,8 @@
     </button>
 
     <div class="sigup">
-      <a href="#">Ingresar</a>
-      <a href="#">Registrarse</a>
+      <div>Ingresar</div>
+      <div>Registrarse</div>
     </div>
 
     <div class="load-slider">
@@ -114,13 +115,7 @@
       <div class="load-title-rev-inv">L’impressionnisme</div>
       <div class="load-title-mini-rev">L’impressionnisme</div>
       <div class="load-title-mini-rev-inv">L’impressionnisme</div>
-    </div>
-
-    <div class="cart">
-      <img class="open-cart" src="./static/ico/cart.svg" alt="cart icon">
-      <div class="mini-pic"></div>
-      <img class="close-ico" src="./static/ico/cross.svg" alt="close icon">
-    </div>
+    </div>    
 
     <div class="slider" style="background-color: #DBCFBD;">
       <div class="big-title" style="color: #515151;">L’impressionnisme</div>
@@ -138,6 +133,49 @@
         <a href="#" class="opt">Inicio</a>
         <a href="#" class="opt">Estudio</a>
         <a href="#" class="opt">Ingresar</a>
+      </div>
+      <img class="close-menu close-ico" src="./static/ico/cross-light.svg" alt="close icon">
+    </div>
+
+    <div class="painture-details">
+      <div class="content">
+        <div class="info"></div>
+        <img class="close-details close-ico" src="./static/ico/cross-light.svg" alt="close icon">
+      </div>
+    </div>
+    <div class="big-img"></div>
+
+    <div class="cart">
+      <div class="margin-title">L’impressionnisme</div>
+      <div class="margin-title-rev">L’impressionnisme</div>
+      <img class="open-cart" src="./static/ico/cart.svg" alt="cart icon">
+      <div class="mini-pic"></div>
+      <img class="close-cart close-ico" src="./static/ico/cross.svg" alt="close icon">
+    </div>
+
+    <div class="login">
+      <div class="login-showcase login-flex"></div>
+      <div class="login-data login-flex">
+        <form action="login.php" method="post">
+            <div class="data-container">
+                <div class="input-container">
+                  <div class="label">Usuario</div>
+                  <input type="text" name="user" required>
+                </div>
+                <div class="input-container">
+                  <div class="label">Contraseña</div>
+                  <input type="text" name="password" required>
+                </div>
+            </div>
+            <div class="button-container">
+              <input type="submit" value="" class="button">
+            </div>
+            <div class="regiter-link">Aún no eres miembro? Unete</div>
+        </form>
+        
+        <div class="margin-title">L’impressionnisme</div>
+        <div class="margin-title-rev">L’impressionnisme</div>
+        <img class="close-login close-ico" src="./static/ico/cross.svg" alt="close icon">
       </div>
     </div>
 
