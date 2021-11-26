@@ -1,30 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap");
 
 .login {
+    width: 100%;
+    height: 100vh;
     position: fixed;
     top: 0px;
     left: 0px;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-wrap: wrap-reverse;
     z-index: 15;
+    transform: translateY(-100%);   
     background-color: #F9E6D6;
-    transform: translateY(-100%);
+    overflow-y: auto;
 }
 
-.login .login-showcase {
+.login .login-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+.login .login-container .login-showcase {
     background-image: url('../static/banks_of_the_seine_at_jenfosse.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.login .login-data {
+.login .login-container .login-data {
     width: 100%;
 }
 
-.login .login-data .button-container {
+.button-container {
     width: 100%;
     display: flex;
     align-items: center;
@@ -33,11 +40,11 @@
     padding-bottom: 20px;
 }
 
-.login .login-data .button-container .button {
+.button-container .button {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px solid #F9E6D6;
+    border: 0px solid #F9E6D6;
     background-color: transparent;
     background-image: url('../static/ico/next-black.svg');
     background-position: center;
@@ -45,7 +52,7 @@
     background-size: contain;
 }
 
-.login .login-data .regiter-link {
+.login .login-container .login-data .register-link {
     width: 100%;
     text-align: center;
     font-style: italic;
@@ -56,70 +63,136 @@
     color: #515151;
 }
 
-.login .login-data form {
+.login .login-container .login-data form {
     width: 100%;
     padding-left: 10px; /*200*/
     padding-right: 10px; /*200*/
 }
 
-.login .login-data .data-container {
+.data-container {
     width: 100%;
 }
 
-.login .login-data .data-container .input-container {
+.data-container .input-container {
     width: 100%;
     padding: 0px; /*20*/
     display: block;
 }
 
-.login .login-data .data-container .input-container .label {
+.data-container .input-container .label {
     width: 100%;
     font-style: normal;
     font-weight: normal;
     font-size: 20px; /*30*/
     line-height: 37px;
     padding-bottom: 0px; /*20*/
-    color: #151515;
 }
 
-.login .login-data .data-container .input-container input {
+.data-container .input-container input {
     width: 100%;
     font-style: normal;
     font-weight: normal;
     font-size: 16px; /*20*/
-    line-height: 37px;
-    color: #151515;
     background-color: transparent;
-    border: 1px solid #F9E6D6;
+    border: 0px solid #F9E6D6;    
+}
+
+.login .data-container .input-container {
+    color: #151515;
+}
+
+.login .data-container .input-container input {
     border-bottom: 1px solid #151515;
 }
 
-.login .login-data .margin-title {
+.login .login-container .login-data .margin-title {
     color: #DBCFBD;
     border-bottom: 1px solid #DBCFBD;
-    clip-path: none;
 }
 
-.login .login-data .margin-title-rev {
-    clip-path: none;
-}
-
-.login .login-flex {
+.login .login-container .login-flex {
     flex: 1;
     min-width: 320px;
+    min-height: 600px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-@media (min-width: 320px) {
-    .login .login-data .button-container .button {
+.register-data {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 15;
+    transform: translateY(100%);
+    background-color: #C4C4C4;
+    overflow-y: auto;
+}
+
+.register-data form {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.register-data .data-container {
+    padding-left: 10px; /*200*/
+    padding-right: 10px; /*200*/
+}
+
+.left-panel {
+    background-color: #515151;
+}
+
+.left-panel .data-container .input-container {
+    color: #C4C4C4;
+}
+
+.left-panel .data-container .input-container input {
+    color: #C4C4C4;
+    border-bottom: 1px solid #C4C4C4;
+}
+
+.right-panel .data-container .input-container {
+    color: #151515;
+}
+
+.right-panel .data-container .input-container input {
+    border-bottom: 1px solid #151515;
+}
+
+.right-panel {
+    background-color: #C4C4C4;
+}
+
+.register-data .flex-panel {
+    flex: 1;
+    min-width: 320px;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-data .arrow-container {
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 320px) {
+    .button-container .button {
         width: calc(50px + 50 * (100vw - 320px) / 1600);
         height: calc(50px + 50 * (100vw - 320px) / 1600);
     }
 
-    .login .login-data .button-container {
+    .button-container {
         padding-bottom: calc(20px + 20 * (100vw - 320px) / 1600);
     }
 
@@ -127,25 +200,62 @@
         font-size: calc(12px + 8 * (100vw - 320px) / 1600);
     }
 
-    .login .login-data .data-container .input-container .label { 
+    .data-container .input-container .label { 
         font-size: calc(70px + 130 * (100vw - 320px) / 1600);
     }
 
     .login .login-data form {
+        padding-left: calc(10px + 190 * (100vw - 320px) / 1600) !important;
+        padding-right: calc(10px + 190 * (100vw - 320px) / 1600) !important;
+    }
+
+    .data-container .input-container {
+        padding: calc(5px + 15 * (100vw - 320px) / 1600);
+    }
+
+    .data-container .input-container .label {
+        font-size: calc(20px + 10 * (100vw - 320px) / 1600);
+        padding-bottom: calc(5px + 15 * (100vw - 320px) / 1600);
+    }
+
+    .data-container .input-container input {
+        font-size: calc(16px + 4 * (100vw - 320px) / 1600);
+    }
+
+    .register-data .data-container {
         padding-left: calc(10px + 190 * (100vw - 320px) / 1600);
         padding-right: calc(10px + 190 * (100vw - 320px) / 1600);
     }
+}
 
-    .login .login-data .data-container .input-container {
-        padding: calc(0px + 20 * (100vw - 320px) / 1600);
+@media screen and (max-width: 1000px) {
+    .login .login-flex {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
     }
 
-    .login .login-data .data-container .input-container .label {
-        font-size: calc(20px + 10 * (100vw - 320px) / 1600);
-        padding-BOTTOM: calc(0px + 20 * (100vw - 320px) / 1600);
+    .login .login-flex:nth-child(2n+1) {
+        /*filter: contrast(0.2);*/
+        filter: brightness(0.5);
     }
 
-    .login .login-data .data-container .input-container input {
-        font-size: calc(16px + 4 * (100vw - 320px) / 1600);
+    .login .data-container .input-container .label {
+        color: #F9E6D6;
+    }
+    
+    .login .data-container .input-container input {
+        color: #F9E6D6;
+        border-bottom: 1px solid #F9E6D6;
+    }
+
+    .login .login-container .login-data .close-ico, .login .button-container .button {
+        filter: invert(100%);
+    }
+
+    .login .login-data .register-link {
+        color: #DBCFBD;
     }
 }

@@ -24,12 +24,16 @@ const dividers = [...document.querySelectorAll('.divider')];
 const details = [...document.querySelectorAll('.details')];
 const dividerText = document.querySelector('.divider-text');
 const footerFlex = [...document.querySelectorAll('.flex')];
-const sigup = document.querySelector('.sigup');
+const floatingRight = document.querySelector('.floating-right');
 const logPanel = document.querySelector('.login');
 const logClose = document.querySelector('.close-login');
+const regData = document.querySelector('.register-data');
+const regClose = document.querySelector('.close-reg');
+const registerLink = document.querySelector('.register-link');
 
-const login = sigup.getElementsByTagName('div')[0];
-const register = sigup.getElementsByTagName('div')[2];
+const login = document.querySelector('#login');
+const menulogin = document.querySelector('#menuLogin');
+const signup = document.querySelector('#signup');
 
 window.addEventListener('mousemove', (event) => {
   gsap.to(cursor, { top: event.clientY + 'px', left: event.clientX + 'px', ease: 'none', duration: 0.1 });
@@ -92,27 +96,63 @@ function loadAnimations() {
     delay: 0.5
   });
 
+  /*gsap.to(cart, {
+    scrollTrigger: {
+      trigger: '.fotter',
+      start: 'top bottom'
+    },
+    translateY: '100px',
+    duration: 0.5
+  });*/
+
   document.body.style.overflowY = 'scroll';
 }
+
+const getMargins = (element) => [element.getElementsByClassName('margin-title')[0], element.getElementsByClassName('margin-title-rev')[0]];
 
 let tl = gsap.timeline({ onComplete: loadAnimations });
 tl.fromTo(sliders[1], { translateY: '0%' }, { translateY: '-100%', duration: 0.6, delay: 0.5 });
 tl.fromTo(sliders[0], { translateY: '100%' }, { translateY: '-100%', duration: 1 }, '-=0.6');
 tl.fromTo(home, { translateY: '100%' }, { translateY: '0%', duration: 1.5 }, '-=1.5');
 tl.fromTo('.hamburger-button', { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.1');
-tl.fromTo(sigup, { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.3');
+tl.fromTo(floatingRight, { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.3');
 tl.fromTo('.scroll-ic', { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.3');
 tl.fromTo(cart, { translateY: '100px' }, { translateY: "0px", duration: 0.5 }, '-=0.3');
+document.getElementById("loginForm").reset();
+document.getElementById("registerForm").reset();
 
-login.addEventListener('click', () => {
-  gsap.to(logPanel, { translateY: '0%', duration: 0.8 });
-});
+let logTl;
+function openLogin() {
+  logTl = gsap.timeline();
+  logTl.to(logPanel, { translateY: '0%', duration: 0.8 });
+  logTl.fromTo('.login-showcase', { opacity: 0 }, { opacity: 1, duration: 0.8 }, '-=0.6');
+  logTl.to(getMargins(logPanel), { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', duration: 0.5 }, '-=0.5');
+}
+
+if(login !== null && menulogin !== null) {
+  login.addEventListener('click', openLogin);
+  menulogin.addEventListener('click', openLogin);
+}
 
 logClose.addEventListener('click', () => {
-  gsap.to(logPanel, { translateY: '-100%', duration: 0.8 });
+  document.getElementById("loginForm").reset();
+  logTl.reverse()
 });
 
-const getMargins = (element) => [element.getElementsByClassName('margin-title')[0], element.getElementsByClassName('margin-title-rev')[0]];
+let regTl;
+function openRegister() {
+  regTl = gsap.timeline();
+  regTl.to(regData, { translateY: '0%', duration: 0.8 });
+  regTl.to(getMargins(regData), { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', duration: 0.5 }, '-=0.5');
+}
+
+registerLink.addEventListener('click', openRegister);
+if(signup !== null)
+  signup.addEventListener('click', openRegister);
+regClose.addEventListener('click', () => {
+  document.getElementById("registerForm").reset();
+  regTl.reverse()
+});
 
 let menuTl;
 menuOpen.addEventListener('click', () => {
@@ -140,27 +180,61 @@ function cartStyles() {
 
 let cartTl;
 cartOpen.addEventListener('click', () => {
-  cartTl = gsap.timeline({ onReverseComplete:cartStyles });
-  cartTl.to(cartOpen, { opacity: 0, duration: 0.3 });
-  cartTl.to(cart, { top: '50%', left: '0px', borderRadius: '0px', ease: 'none', duration: 0.3 });
-  cartTl.to(cart, { top: '0px', duration: 0.3 });
-  cartTl.to(getMargins(cart), { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', duration: 0.5 });
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      let showcase = cart.getElementsByClassName('mini-showcase')[0];
+      cartTl = gsap.timeline({ onReverseComplete: cartStyles });
+      cartTl.to(cartOpen, { opacity: 0, duration: 0.3 });
+      cartTl.to(miniPic, { opacity: 0, duration: 0.3, onComplete: function() { miniPic.style.backgroundImage = 'none' } }, '-=0.3');
+      cartTl.to(cart, { top: '50%', left: '0px', borderRadius: '0px', ease: 'none', duration: 0.3 });
+      cartTl.to(cart, { top: '0px', duration: 0.3 });
+      cartTl.to(getMargins(cart), { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', duration: 0.5 });
+      cartTl.to(showcase, { opacity: 1, duration: 0.5 }, '-=0.5');
+      showcase.innerHTML = this.responseText;
+      let paintures = [...showcase.getElementsByClassName('mini-card')];
+
+      paintures.forEach(painture => {
+        let deleteBtn = painture.getElementsByClassName('delete')[0];
+
+        deleteBtn.addEventListener('click', () => {
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              let rect = painture.getBoundingClientRect();
+              painture.style.width = rect.width + 'px';
+              painture.style.minWidth = 'unset';
+              tl.to(painture, { opacity: 0, duration: 0.5 });
+              tl.to(painture, { width: '0%', duration: 0.5, onComplete: function() { painture.remove() } });
+            }
+          };
+          xmlhttp.open("GET", "src/php/remove_from_cart.php?painture=" + deleteBtn.getAttribute('data-name'), true);
+          xmlhttp.send();
+          let tl = gsap.timeline();
+        });
+      });
+    }
+  };
+  xmlhttp.open("GET", "src/php/load_cart.php", true);
+  xmlhttp.send();  
 });
 
 cartClose.addEventListener('click', () => cartTl.reverse());
 
 let tl2 = gsap.timeline({ repeat: -1 });
-tl2.to('.scroll-ball', { top: 'unset', bottom: '3px', duration: 0.5 });
-tl2.to('.scroll-ball', { top: '3px', bottom: 'unset', duration: 0.3, delay: 0.5 });
+/*tl2.to('.scroll-ball', { top: 'unset', bottom: '3px', duration: 0.5 });
+tl2.to('.scroll-ball', { top: '3px', bottom: 'unset', duration: 0.3, delay: 0.5 });*/
+tl2.to('.scroll-ball', { translateY: '200%', duration: 0.5, delay: 0.2 });
+tl2.to('.scroll-ball', { translateY: '0%', duration: 0.1, delay: 0.5 });
 
 let rect = dividerText.getBoundingClientRect();
 let tl4 = gsap.timeline({ repeat: -1 });
 tl4.fromTo(dividerText, { translateX: '0%' }, { translateX: -(rect.width - window.innerWidth) + 'px', duration: 5, ease: 'none' });
 
+let top = '50vh';
 function hideImage() {
   document.body.style.overflowY = 'scroll';
   bigImg.style.display = 'none';
-  bigImg.removeEventListener('click', showImg);
 }
 
 let showing = false;
@@ -168,7 +242,7 @@ function showImg() {
   let content = paintureDetails.getElementsByClassName('content')[0];
   if(showing) {
     gsap.to(content, { opacity: 1, duration: 0.3 });
-    gsap.to(bigImg, { top: '50vh', duration: 0.5 });
+    gsap.to(bigImg, { top: top, duration: 0.5 });
   }
   else {
     gsap.to(content, { opacity: 0, duration: 0.3 });
@@ -177,21 +251,24 @@ function showImg() {
   showing = !showing;
 }
 
-function onHoverImg() {
-  bigImg.addEventListener('click', showImg);
-}
-
 let paintureTl;
+detailsClose.addEventListener('click', () => paintureTl.reverse());
 paintures.forEach(painture => {
   let cartIco = painture.getElementsByClassName('cart-ico')[0];
   let cardImg = painture.getElementsByClassName('card-img')[0];
   let slider = cardImg.getElementsByClassName('img-slider')[0];
   let clickBtn = cardImg.getElementsByClassName('click-btn')[0];
 
-  cartIco.addEventListener('click', () => {
-    miniPic.style.backgroundImage = `url('./static/${cardImg.getAttribute('data-img')}')`;
-    gsap.fromTo(miniPic,{ opacity: 0 }, { opacity: 1, duration: 0.3 });
-    //gsap.to(miniPic, { opacity: 0, duration: 0.3, delay: 1.5 });
+  cartIco.addEventListener('click', () => {    
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        miniPic.style.backgroundImage = `url('./static/${cardImg.getAttribute('data-img')}')`;
+        gsap.fromTo(miniPic,{ opacity: 0 }, { opacity: 1, duration: 0.3 });
+      }
+    };
+    xmlhttp.open("GET", "src/php/add_to_cart.php?painture=" + painture.getAttribute('data-name'), true);
+    xmlhttp.send();
   });
 
   cartIco.addEventListener('mouseenter', () => {
@@ -221,7 +298,7 @@ paintures.forEach(painture => {
 
   cardImg.addEventListener('mouseleave', () => imgTl.reverse());
 
-  painture.addEventListener('click', () => {
+  cardImg.addEventListener('click', () => {
     document.body.style.overflow = 'hidden';
     paintureTl = gsap.timeline({ onReverseComplete: hideImage });
     let rect = cardImg.getBoundingClientRect();
@@ -234,24 +311,26 @@ paintures.forEach(painture => {
     bigImg.style.left = rect.left + 'px';
     bigImg.style.backgroundImage = `url('./static/${cardImg.getAttribute('data-img')}')`;
 
-    paintureTl.to(cardImg, { opacity: 0, duration: 0.2 });
-    paintureTl.to(elements, { opacity: 0, duration: 0.8 }, '-=0.2');
-    paintureTl.to(bigImg, { opacity: 1, duration: 0.8 }, '-=0.8');
-    paintureTl.to(home, { opacity: 0, duration: 0.8 });
-    paintureTl.fromTo(cart, { translateY: '0px' }, { translateY: "100px", duration: 0.5 }, '-=0.8');
-    paintureTl.to(bigImg, { width: '100%', height: '100vh', top: '50vh', left: '0px', duration: 0.6 });
-    paintureTl.to(paintureDetails, { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', duration: 1, onComplete: onHoverImg }, '-=0.2');
-
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        paintureDetails.getElementsByClassName('info')[0].innerHTML = this.responseText;
+        paintureDetails.getElementsByClassName('content')[0].innerHTML = this.responseText;
+        let paintureImg = paintureDetails.getElementsByClassName('painture-img')[0];
+        let rect2 = paintureImg.getBoundingClientRect();
+        top = rect2.top + 'px';
+
+        paintureTl.to(cardImg, { opacity: 0, duration: 0.2 });
+        paintureTl.to(elements, { opacity: 0, duration: 0.8 }, '-=0.2');
+        paintureTl.to(bigImg, { opacity: 1, duration: 0.8 }, '-=0.8');
+        paintureTl.to(home, { opacity: 0, duration: 0.8 });
+        paintureTl.fromTo(cart, { translateY: '0px' }, { translateY: "100px", duration: 0.5 }, '-=0.8');
+        paintureTl.to(bigImg, { width: rect2.width + 'px', height: '100vh', top: top, left: '0px', backgroundPosition: 'top', duration: 0.6 });
+        paintureTl.to(paintureDetails, { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', duration: 1 }, '-=0.2');
+        paintureTl.to(bigImg, { opacity: 0, duration: 0.2 });
       }
     };
-    xmlhttp.open("GET", "src/php/getPainture.php?name=" + painture.getAttribute('data-name'), true);
+    xmlhttp.open("GET", "src/php/get_painture.php?name=" + painture.getAttribute('data-name'), true);
     xmlhttp.send();
   });
 
 });
-
-detailsClose.addEventListener('click', () => paintureTl.reverse());
