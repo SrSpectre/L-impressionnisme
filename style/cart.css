@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap");
+
+.cart {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: calc(100vh - 80px);
+    left: calc(100vw - 150px);
+    z-index: 15;
+    border-radius: 20px 0px 0px 0px;
+    box-shadow: -2px -2px 10px rgba(115, 112, 104, 0.5);
+    background-color: #DBCFBD;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+  
+.cart .cart-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 30px;
+}
+
+.cart .cart-content:nth-child(2n) {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: translateX(100%);
+}
+  
+.cart .mini-showcase {
+    display: flex;
+    overflow-x: auto;
+    min-height: 640px;
+    width: 100%;
+    height: calc(100% - 100px);
+    padding: 60px 0px;
+    opacity: 0;
+}
+  
+.cart .mini-showcase .mini-card {
+    min-width: 320px;
+    height: 100%;
+    position: relative;
+    padding: 0px 10px;
+}
+  
+.cart .mini-showcase .mini-card .card-price  {
+    height: 50px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 49px;
+    font-size: 22px;
+    text-align: center;
+    color: #151515;
+    margin-bottom: 0px;
+}
+  
+.cart .mini-showcase .mini-card .card-price span {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 37px;
+    text-align: center;
+    color: #151515;
+}
+  
+.cart .mini-showcase .mini-card .card-img {
+    width: 100%;
+    height: calc(100% - 150px);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+  
+.cart .mini-showcase .mini-card .card-details {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 40px;
+    color: #151515;
+    border-bottom: 1px solid #151515;
+}
+  
+.cart .mini-showcase .mini-card .delete {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 40px;
+    height: 40px;  
+}
+  
+.cart .to-container {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+  
+.cart .to-button {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+  
+.cart .open-cart {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+}
+
+.cart .card-view {
+    width: 100%;
+    height: 100%;
+}
+
+.cart .card-view form {
+    width: 100%;
+    height: 100%;
+}
+
+.cart .card-view .card-container {
+    width: 100%;
+    height: calc(100% - 100px);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cart .card-view .card-container .card-flex {
+    flex: 1;
+    min-width: 320px;
+    min-height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart .card-view .card-container .card-shape {
+    width: 80%;
+    height: 60%;
+    position: relative;
+    border-radius: 10px;
+    background-color: #F9E6D6;
+    box-shadow: 0px 0px 5px rgba(15, 15, 15, 0.5);
+}
+
+.cart .card-view .card-container .card-shape .card-info {
+    width: 90%;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+}
+
+.cart .card-view .card-container .card-shape .large-field {
+    width: 100%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 35px;
+    background-color: transparent;
+    border: 0px solid #F9E6D6;   
+    border-bottom: 1px solid #151515;
+    padding-top: 10px;
+}
+
+.cart .card-view .card-container .card-shape .card-date {
+    width: 50%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 35px;
+    background-color: transparent;
+    border: 0px solid #F9E6D6;   
+    border-bottom: 1px solid #151515;
+    padding-top: 10px;
+}
+
+.cart .card-view .card-container .card-shape .card-line {
+    width: 100%;
+    height: 15%;
+    position: absolute;
+    top: 20%;
+    left: 0px;
+    background-color: #515151;
+}
+
+.cart .card-view .card-container .card-shape .card-cvv {
+    width: 45%;
+    height: 25%;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.cart .card-view .card-container .card-shape .card-cvv input {
+    width: 80px;
+    height: 100%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 37px;
+    text-align: center;
+    background-color: transparent;
+    border: 0px solid #F9E6D6;   
+}
+
+@media screen and (min-width: 320px) {
+    .cart {
+        top: calc(100vh - (80px + 20 * (100vw - 320px) / 1600));
+        left: calc(100vw - (150px + 100 * (100vw - 320px) / 1600));
+    }
+
+    .cart .cart-content {
+        padding-bottom: calc(60px + 30 * (100vw - 320px) / 1600);
+    }
+
+    .cart .mini-showcase {
+        padding: calc(60px + 30 * (100vw - 320px) / 1600) calc(0px + 90 * (100vw - 320px) / 1600);
+    }
+
+    .cart .open-cart {
+        top: calc(15px + 10 * (100vw - 320px) / 1600);
+        left: calc(20px + 30 * (100vw - 320px) / 1600);
+    }
+
+    .cart .mini-pic {
+        width: calc(50px + 20 * (100vw - 320px) / 1600);
+        height: calc(50px + 20 * (100vw - 320px) / 1600);
+        left: calc(80px + 60 * (100vw - 320px) / 1600);
+    }
+
+    .cart .card-view .card-container .card-shape .large-field {
+        font-size: calc(16px + 14 * (100vw - 320px) / 1600);
+        line-height: calc(35px + 10 * (100vw - 320px) / 1600);
+        padding-top: calc(10px + 10 * (100vw - 320px) / 1600);
+    }
+
+    .cart .card-view .card-container .card-shape .card-date {
+        font-size: calc(16px + 14 * (100vw - 320px) / 1600);
+        line-height: calc(35px + 10 * (100vw - 320px) / 1600);
+        padding-top: calc(10px + 10 * (100vw - 320px) / 1600);
+    }
+
+    .cart .card-view .card-container .card-shape .card-cvv input {
+        font-size: calc(16px + 14 * (100vw - 320px) / 1600);
+    }
+}

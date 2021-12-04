@@ -12,35 +12,26 @@ $address = trim($_POST['address']);
 $zip = trim($_POST['zip']);
 
 if (!empty($user) && !empty($name) && !empty($lname) && !empty($email) && !empty($pswd) && !empty($rpswd) && !empty($state) && !empty($town) && !empty($colony) && !empty($address) && !empty($zip)) {
+    $pswd = md5($pswd);
+    $rpswd = md5($rpswd);
     if($pswd == $rpswd) {
-        setlocale(LC_MONETARY, 'en_US');
-        $servername = 'localhost';
-        $username = 'root';
-        $password = 'My_Data_Bases1';
-        $dbname = 'limpressionnisme';
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check connection
-        if ($conn->connect_error) {
-            die('Connection failed: ' . $conn->connect_error);
-        }
-        else {
-            $sql = 'SELECT * FROM users WHERE uname="'.$user.'" OR email="'.$email.'"';
+        $conn = include './db_conn.php';
+        if($conn) {
+            $sql = "SELECT * FROM users WHERE uname='$user' OR email='$email'";
             $result = $conn->query($sql);
 
             if ($result->num_rows <= 0) {
-                $sql = 'INSERT INTO users (uname, name, lname, email, pswd) VALUES ("'.$user.'", "'.$name.'", "'.$lname.'", "'.$email.'", "'.$pswd.'")';
+                $sql = "INSERT INTO users (uname, name, lname, email, pswd) VALUES ('$user', '$name', '$lname', '$email', '$pswd')";
                 $result = $conn->query($sql);
 
-                if($result = TRUE) {
-                    $sql = 'SELECT id FROM users WHERE uname="'.$user.'" OR email="'.$email.'" LIMIT 1';
+                if($result) {
+                    $sql = "SELECT id FROM users WHERE uname='$user' OR email='$email' LIMIT 1";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                         if($row = $result->fetch_assoc()) {
-                            $sql = 'INSERT INTO address (id_user, state, town, colony, address, zip_code) VALUES ("'.$row["id"].'", "'.$state.'", "'.$town.'", "'.$colony.'", "'.$address.'", "'.$zip.'")';
+                            $id = $row["id"];
+                            $sql = "INSERT INTO addresses (id_user, state, town, colony, address, zip_code) VALUES ('$id', '$state', '$town', '$colony', '$address', '$zip')";
                             $result = $conn->query($sql);
                             echo $result;
                         }                        
@@ -50,10 +41,10 @@ if (!empty($user) && !empty($name) && !empty($lname) && !empty($email) && !empty
                 else echo FALSE;
             }
             else echo FALSE;
+
+            $conn->close();
         }
         header('Location: ../../index.php');
-
-        $conn->close();
     }    
 }
 ?>

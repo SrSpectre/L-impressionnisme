@@ -94,7 +94,8 @@
     font-weight: normal;
     font-size: 16px; /*20*/
     background-color: transparent;
-    border: 0px solid #F9E6D6;    
+    border: 0px solid #F9E6D6;
+    text-align: center;
 }
 
 .login .data-container .input-container {
@@ -132,14 +133,26 @@
     overflow-y: auto;
 }
 
-.register-data form {
+.account-data {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 15;
+    transform: translateY(100%);
+    background-color: #C4C4C4;
+    overflow-y: auto;
+}
+
+.register-data form, .account-data form {
     width: 100%;
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
 }
 
-.register-data .data-container {
+.register-data .data-container, .account-data .data-container {
     padding-left: 10px; /*200*/
     padding-right: 10px; /*200*/
 }
@@ -166,10 +179,89 @@
 }
 
 .right-panel {
+    position: relative;
     background-color: #C4C4C4;
+    overflow: hidden;
 }
 
-.register-data .flex-panel {
+.right-panel .history-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #F9E6D6;
+    transform: translateY(100%);
+    overflow: scroll;
+}
+
+.right-panel .history-container .history-element .history-date {
+    width: fit-content;
+    padding: 20px 50px;
+    border-bottom-right-radius: 20px;
+    background-color: #515151;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 49px;
+    text-align: center;
+    color: #F9E6D6;
+}
+
+.right-panel .history-container .history-element .history-items {
+    padding: 10px;
+}
+
+.right-panel .history-container .history-element .history-item {
+    height: 80px;
+    margin: 10px;
+    display: flex;
+}
+
+.right-panel .history-container .history-element .history-item img {
+    width: 80px;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.right-panel .history-container .history-element .history-item .item-details-container {
+    width: calc(100% - 100px);
+    height: 100%;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.right-panel .history-container .history-element .history-item .item-details-container .item-details {
+    width: 100%;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 20px;
+    color: #151515;
+}
+
+.right-panel .history-container .history-element .history-item .item-details-container .item-details .item-price {
+    text-align: right;
+    padding-top: 0px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    text-align: center;
+}
+
+.right-panel .history-container .history-element .history-item .item-details-container .item-details .item-price span {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 20px;
+    text-align: center;
+    color: #151515;
+}
+
+.flex-panel {
     flex: 1;
     min-width: 320px;
     min-height: 600px;
@@ -185,6 +277,30 @@
     align-items: center;
     justify-content: center;
 }
+
+.link-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.link-container input, .link-container div {
+    text-align: center;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 25px;
+    background-color: transparent;
+    text-decoration-line: underline;
+    color: #515151;
+    border: 0px solid #F9E6D6;
+}
+
+.link-container div {
+    color: #C4C4C4;
+}
+
 
 @media screen and (min-width: 320px) {
     .button-container .button {
@@ -222,9 +338,44 @@
         font-size: calc(16px + 4 * (100vw - 320px) / 1600);
     }
 
-    .register-data .data-container {
+    .register-data .data-container, .account-data .data-container {
         padding-left: calc(10px + 190 * (100vw - 320px) / 1600);
         padding-right: calc(10px + 190 * (100vw - 320px) / 1600);
+    }
+
+    .link-container input, .link-container div {
+        font-size: calc(12px + 8 * (100vw - 320px) / 1600);
+    }
+
+    .right-panel .history-container .history-element .history-items {
+        padding: calc(10px + 40 * (100vw - 320px) / 1600);
+    }
+
+    .right-panel .history-container .history-element .history-item {
+        height: calc(80px + 120 * (100vw - 320px) / 1600);
+    }
+    
+    .right-panel .history-container .history-element .history-item img {
+        width: calc(80px + 120 * (100vw - 320px) / 1600);
+    }
+
+    .right-panel .history-container .history-element .history-item .item-details-container {
+        padding-left: calc(20px + 30 * (100vw - 320px) / 1600);
+    }
+    
+    .right-panel .history-container .history-element .history-item .item-details-container .item-details {
+        font-size: calc(20px + 20 * (100vw - 320px) / 1600);
+        line-height: calc(20px + 19 * (100vw - 320px) / 1600);
+    }
+    
+    .right-panel .history-container .history-element .history-item .item-details-container .item-details .item-price {
+        padding-top: calc(0px + 50 * (100vw - 320px) / 1600);
+        font-size: calc(15px + 5 * (100vw - 320px) / 1600);
+    }
+    
+    .right-panel .history-container .history-element .history-item .item-details-container .item-details .item-price span {
+        font-size: calc(10px + 5 * (100vw - 320px) / 1600);
+        line-height: calc(20px + 19 * (100vw - 320px) / 1600);
     }
 }
 
