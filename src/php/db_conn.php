@@ -1,8 +1,8 @@
 <?php
     setlocale(LC_MONETARY, 'en_US');
     $servername = 'localhost';
-    $username = 'root';
-    $password = 'My_Data_Bases1';
+    $username = 'accessor';
+    $password = 'accessor_1';
     $dbname = 'limpressionnisme';
 
     // Create connection

@@ -17,7 +17,9 @@ if ($name !== "") {
                         <div class="painture-title">'.$row["name"].'</div>
                         <div class="painture-text">'.$row["painter"].'<br>'.$row["dimens"].'<br>'.$row["technique"].'<br>'.$row["year"].'</div>
                         <div class="price-container">
-                            <img class="add-ico" src="./static/ico/add.svg" alt="add icon" data-name="'.$row["name"].'">
+                            <a href="../static/'.$row["img_name"].'" download="'.$row["name"].'">
+                                <img class="add-ico" src="./static/ico/add.svg" alt="add icon" data-name="'.$row["name"].'">
+                            </a>
                             <div class="painture-price">$'.$price.'<span>.00</span></div>
                         </div>
                     </div>
