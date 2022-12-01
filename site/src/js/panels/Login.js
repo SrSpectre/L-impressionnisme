@@ -1,5 +1,5 @@
-import AbstractView from "./AbstractView";
-import { getMargins } from "../utils";
+import AbstractView from "./AbstractView.js";
+import { getMargins } from "../utils.js";
 
 export default class extends AbstractView {
     constructor() {

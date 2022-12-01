@@ -1,8 +1,8 @@
-import { getMargins } from "./utils"; 
-import { showPainture } from "./painture_details";
-import { createRecuest } from "./async/httpRequest";
-import { alertDialog } from "./message_box";
-import { createSliders } from "./sliders";
+import { getMargins } from "./utils.js"; 
+import { showPainture } from "./painture_details.js";
+import { createRecuest } from "./async/httpRequest.js";
+import { alertDialog } from "./message_box.js";
+import { createSliders } from "./sliders.js";
 
 const home = document.querySelector('.home');
 const cart = document.querySelector('.cart');

@@ -90,7 +90,7 @@
               @2021 All rights reserved<br>
             </div>
             <div class="next-section flex">
-              <a href="/studio">
+              <a href="/studio.php">
                 Estudio
                 <img src="./static/ico/next.svg" alt="Next section icon">
               </a>
@@ -134,7 +134,7 @@
         <div class="margin-content">
           <div class="menu-opt">
             <a href="/" class="opt">Inicio</a>
-            <a href="/studio" class="opt">Estudio</a>
+            <a href="/studio.php" class="opt">Estudio</a>
             <?php
               if(isset($_SESSION["name"]))
                 echo '<a href="src/php/logout.php" class="opt">Salir</a>';

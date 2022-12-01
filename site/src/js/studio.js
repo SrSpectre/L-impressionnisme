@@ -1,4 +1,4 @@
-import { getRandomInRange } from "./utils";
+import { getRandomInRange } from "./utils.js";
 
 const bienvenue =  document.querySelector('.bienvenue-text');
 const details =  document.querySelector('.our-details');

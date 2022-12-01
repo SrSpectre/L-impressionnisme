@@ -1,6 +1,6 @@
-import Login from "./panels/Login";
-import Register from "./panels/Register";
-import Account from "./panels/Account";
+import Login from "./panels/Login.js";
+import Register from "./panels/Register.js";
+import Account from "./panels/Account.js";
 
 const router = async(pathname) => {
     const routes = [

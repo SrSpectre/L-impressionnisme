@@ -1,5 +1,5 @@
-import { getMargins } from "./utils";
-import { createSliders } from "./sliders";
+import { getMargins } from "./utils.js";
+import { createSliders } from "./sliders.js";
 
 const home = document.querySelector('.home');
 const studio = document.querySelector('.studio');

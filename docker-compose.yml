@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  project:
+    container_name: project
+    expose:
+      - 80
+    build: site
+    ports:
+      - "3001:3001"
+    links:
+      - projectdb
+  projectdb:
+    image: mysql:latest
+    container_name: projectdb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root1234

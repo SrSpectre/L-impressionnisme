@@ -1,6 +1,6 @@
-import AbstractView from "./AbstractView";
-import { getMargins } from "../utils";
-import { createRecuest } from "../async/httpRequest";
+import AbstractView from "./AbstractView.js";
+import { getMargins } from "../utils.js";
+import { createRecuest } from "../async/httpRequest.js";
 
 export default class extends AbstractView {
     constructor() {
