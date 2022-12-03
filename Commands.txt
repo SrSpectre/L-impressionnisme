@@ -1,0 +1,19 @@
+# Create network (for container communication)
+	docker network ls
+	docker network create projnet
+
+# Inside database folder
+	docker build -t projectdb .
+
+# Inside site folder
+	docker build -t project:1 .
+
+# Don't care where location run these commands, they are for create containers
+# First database container, then site container
+	docker create --name projectdb --network projnet projectdb:latest
+	docker create -p 3001:80 --name project --network projnet project:1
+
+# Now to run containers
+# First database container, then site container
+	docker start projectdb
+	docker start project
